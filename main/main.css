@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+* {
+margin: 0;
+padding: 0;
+outline: none;
+}
+
+body , html {
+
+    width: 100%;
+    height: 100%;
+}
+
+body {
+
+    background-color: #343434;
+    font-family: Trebuchet MS,  Helvetica  ;
+
+}
+span {
+    font-size:20px;
+    font-size: 1.7em;
+    line-height: 45px;
+    margin-left: 40px;
+}
+
+.btn {
+    font:15px Calibri, Arial, sans-serif;
+ 
+    /* Полупрозрачная тень текста */
+    text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+ 
+    /* Подчёркиваем ссылки */
+    text-decoration:none !important;
+    white-space:nowrap;
+ 
+    display:inline-block;
+    vertical-align:baseline;
+    position:relative;
+    cursor:pointer;
+    padding:10px 20px;
+ 
+    background-repeat:no-repeat;
+ 
+    background-position:bottom left;
+    background-image:url('button_bg.png');
+ 
+    
+ 
+    background-position:bottom left, top right, 0 0, 0 0;
+    background-clip:border-box;
+ 
+  
+ 
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+ 
+  
+ 
+    -moz-box-shadow:0 0 1px #fff inset;
+    -webkit-box-shadow:0 0 1px #fff inset;
+    box-shadow:0 0 1px #fff inset;
+ 
+ 
+ 
+    -webkit-transition:background-position 1s;
+    -moz-transition:background-position 1s;
+    -o-transition:background-position 1s;
+    transition:background-position 1s;
+}
+ 
+.button:hover{
+ 
+    background-position:top left;
+    background-position:top left, bottom right, 0 0, 0 0;
+}
+
+.btn1 {
+    font:15px Calibri, Arial, sans-serif;
+ 
+    /* Полупрозрачная тень текста */
+    text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+ 
+    /* Подчёркиваем ссылки */
+    text-decoration:none !important;
+    white-space:nowrap;
+ 
+    display:inline-block;
+    vertical-align:baseline;
+    position:relative;
+    cursor:pointer;
+    padding:10px 20px;
+ 
+    background-repeat:no-repeat;
+ 
+    background-position:bottom left;
+    background-image:url('button_bg.png');
+ 
+    
+ 
+    background-position:bottom left, top right, 0 0, 0 0;
+    background-clip:border-box;
+ 
+  
+ 
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+ 
+  
+ 
+    -moz-box-shadow:0 0 1px #fff inset;
+    -webkit-box-shadow:0 0 1px #fff inset;
+    box-shadow:0 0 1px #fff inset;
+ 
+ 
+ 
+    -webkit-transition:background-position 1s;
+    -moz-transition:background-position 1s;
+    -o-transition:background-position 1s;
+    transition:background-position 1s;
+}
+
+.btn2 {
+    font:15px Calibri, Arial, sans-serif;
+ 
+    /* Полупрозрачная тень текста */
+    text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+ 
+    /* Подчёркиваем ссылки */
+    text-decoration:none !important;
+    white-space:nowrap;
+ 
+    display:inline-block;
+    vertical-align:baseline;
+    position:relative;
+    cursor:pointer;
+    padding:10px 20px;
+ 
+    background-repeat:no-repeat;
+ 
+    background-position:bottom left;
+    background-image:url('button_bg.png');
+ 
+    
+ 
+    background-position:bottom left, top right, 0 0, 0 0;
+    background-clip:border-box;
+ 
+  
+ 
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+ 
+  
+ 
+    -moz-box-shadow:0 0 1px #fff inset;
+    -webkit-box-shadow:0 0 1px #fff inset;
+    box-shadow:0 0 1px #fff inset;
+ 
+ 
+ 
+    -webkit-transition:background-position 1s;
+    -moz-transition:background-position 1s;
+    -o-transition:background-position 1s;
+    transition:background-position 1s;
+}
+
+.btn3 {
+    font:15px Calibri, Arial, sans-serif;
+ 
+    /* Полупрозрачная тень текста */
+    text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+ 
+    /* Подчёркиваем ссылки */
+    text-decoration:none !important;
+    white-space:nowrap;
+ 
+    display:inline-block;
+    vertical-align:baseline;
+    position:relative;
+    cursor:pointer;
+    padding:10px 20px;
+ 
+    background-repeat:no-repeat;
+ 
+    background-position:bottom left;
+    background-image:url('button_bg.png');
+ 
+    
+ 
+    background-position:bottom left, top right, 0 0, 0 0;
+    background-clip:border-box;
+ 
+  
+ 
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+ 
+  
+ 
+    -moz-box-shadow:0 0 1px #fff inset;
+    -webkit-box-shadow:0 0 1px #fff inset;
+    box-shadow:0 0 1px #fff inset;
+ 
+ 
+ 
+    -webkit-transition:background-position 1s;
+    -moz-transition:background-position 1s;
+    -o-transition:background-position 1s;
+    transition:background-position 1s;
+}
+
+.btn4 {
+    font:15px Calibri, Arial, sans-serif;
+ 
+    /* Полупрозрачная тень текста */
+    text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+ 
+    /* Подчёркиваем ссылки */
+    text-decoration:none !important;
+    white-space:nowrap;
+ 
+    display:inline-block;
+    vertical-align:baseline;
+    position:relative;
+    cursor:pointer;
+    padding:10px 20px;
+ 
+    background-repeat:no-repeat;
+ 
+    background-position:bottom left;
+    background-image:url('button_bg.png');
+ 
+    
+ 
+    background-position:bottom left, top right, 0 0, 0 0;
+    background-clip:border-box;
+ 
+  
+ 
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+ 
+  
+ 
+    -moz-box-shadow:0 0 1px #fff inset;
+    -webkit-box-shadow:0 0 1px #fff inset;
+    box-shadow:0 0 1px #fff inset;
+ 
+ 
+ 
+    -webkit-transition:background-position 1s;
+    -moz-transition:background-position 1s;
+    -o-transition:background-position 1s;
+    transition:background-position 1s;
+}
+
+.btn5 {
+    font:15px Calibri, Arial, sans-serif;
+ 
+    /* Полупрозрачная тень текста */
+    text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+ 
+    /* Подчёркиваем ссылки */
+    text-decoration:none !important;
+    white-space:nowrap;
+ 
+    display:inline-block;
+    vertical-align:baseline;
+    position:relative;
+    cursor:pointer;
+    padding:10px 20px;
+ 
+    background-repeat:no-repeat;
+ 
+    background-position:bottom left;
+    background-image:url('button_bg.png');
+ 
+    
+ 
+    background-position:bottom left, top right, 0 0, 0 0;
+    background-clip:border-box;
+ 
+  
+ 
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+ 
+  
+ 
+    -moz-box-shadow:0 0 1px #fff inset;
+    -webkit-box-shadow:0 0 1px #fff inset;
+    box-shadow:0 0 1px #fff inset;
+ 
+ 
+ 
+    -webkit-transition:background-position 1s;
+    -moz-transition:background-position 1s;
+    -o-transition:background-position 1s;
+    transition:background-position 1s;
+}
+
+header {
+
+    width: 100%;
+    padding: 10px 0.5% 0px 0.5%;
+    background: transparent;
+    float: left;
+    position: fixed;
+}
+
+header #logo {
+    color: #fff;
+    cursor: pointer;
+
+}
+#logo a
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+
+
+header #logo span {
+font-size: 1.3em;
+line-height: 55px;
+margin-left: 10px;
+
+
+}
+
+@media (min-width: 701px) {
+    #logo {
+        float:  left;
+        width: 30%;
+        font-size: 1.1em;
+    }
+}
+
+
+#about {
+
+    float: right;
+    width: 67%;
+}
+
+@media (max-width: 700px) {
+    #logo {
+        margin-top: 15px;
+        width: 100%;
+        font-size: 1.1em;
+    }
+}
+
+#about {
+
+    float: left;
+    width: 100%;
+}
+
+#about {
+
+    text-align:  center;
+    font-size:  1em;
+    line-height: 40px;
+    margin-bottom: 10px;
+
+}
+
+#about > a{color:#fff ;}
+
+#about >a:hover{
+    color: #b0b0b0;
+    text-decoration: underline;
+}
+
+#about >a:not(:last-child) {
+
+    margin-right: 10%;
+}
+
+
+
+.fixed {
+
+    z-index: 5000;
+    background-color: #fff;
+    border-bottom: 1px solid silver;
+}
+
+header.fixed #logo {
+
+    color: #343434;
+}
+
+.fixed #about a {color: #343434}
+.fixed #about a:hover {color: #7c7c7c}
+
+
+
+#top {
+
+    width: 100%;
+    height: 1000px;
+    background-image: url(books.jpg);
+    background-blend-mode: multiply;
+    background-color: #343434;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    font-size: 3em;
+
+}
+
+#top h1 {
+
+    padding-top: 20%;
+}
+
+#top h3 {
+
+    color:#ccc;
+}
+.footer {
+	background-color: #343434;
+}
+
+.footer h4 {
+	color: #ccc;
+	text-transform: uppercase;
+	font-size: 16px;
+	border-bottom: 1px solid #666;
+	padding-bottom: 3px;
+}
+
+.footer a {
+	text-decoration: none;
+	transition: all .3s;
+}
+
+.footer a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.footer a, .footer li {
+	color: #c8c8c8;
+}
+
+.footer li a {
+	display: block;
+}
+
+.footer-icons a {
+	display: inline-block;
+	margin-right: 15px;
+	font-size: 20px;
+}
