@@ -3,11 +3,27 @@ const bodyParser = require('body-parser');
 const {MongoClient} = require('mongodb');
 const path = require('path');
 var cons = require('consolidate');
+const cors = require("cors");
+const cookieSession = require("cookie-session");
+
+var corsOptions = {
+  origin: "http://localhost:3001"
+};
 
 const app = express();
 const uri = "mongodb+srv://jakub:123@cluster0.yd9mj.mongodb.net/?retryWrites=true&w=majority";
 
+app.use(cors(corsOptions));
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended:true}));
+app.use(
+  cookieSession({
+    name: "proj-session",
+    secret: "COOKIE_SECRET",
+    httpOnly: true
+  })
+)
 app.use(express.static('main'));
 app.engine('html',cons.swig)
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +35,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/main/Login.html');
+    //res.sendFile(__dirname + '/main/Login.html');
+    res.render(path.join(__dirname, '/main/Login.html'), {error: ""});
 });
+
+app.get('/register',(req,res)=>{
+  res.render(path.join(__dirname, '/main/register.html'), {error: ""})
+})
 
 app.post('/login', (req, res) => {
     let username = req.body.username;
@@ -29,17 +50,46 @@ app.post('/login', (req, res) => {
         if (err) throw err;
         var dbo = db.db("ProjektZespolowy");
         dbo.collection("Users").findOne({ username: {$eq: username}, password: {$eq: password} }, function(err, result) {
-          if (err) throw err;
+          if (err)
+            throw err;
           if(result)
             //res.sendFile(__dirname + '/main/main.html');
             res.render(path.join(__dirname, '/main/main.html'), {name: username});
           else
-            res.sendFile(__dirname + '/main/Login.html');
+            //res.sendFile(__dirname + '/main/Login.html');
+            res.render(path.join(__dirname, '/main/Login.html'), {error: "Nie ma takiego użytkownika."});
           db.close();
         });
       }); 
     
 });
+
+app.post('/register', (req,res)=>{
+  let username = req.body.username;
+  let password = req.body.password;
+  MongoClient.connect(uri, (err,db) =>{
+    if(err) throw err;
+    var dbo = db.db("ProjektZespolowy");
+    dbo.collection("Users").findOne({ username: {$eq: username}}, function(err, result) {
+      if (err)
+        throw err;
+      if(result){
+        //res.sendFile(__dirname + '/main/main.html');
+        res.render(path.join(__dirname, '/main/register.html'), {error: "Uzytkownik o danej nazwie juz istnieje."});
+        db.close();
+      } else {
+        dbo.collection("Users").insertOne({username: username, password:password}, function(err,res){
+          if(err) throw err;
+          db.close();
+        })
+        res.render(path.join(__dirname, '/main/main.html'), {name: username});
+        
+      }
+      
+    });
+    
+  })
+})
 
 const port = 3000;
 
