@@ -28,7 +28,60 @@ app.use(express.static('main'));
 app.engine('html',cons.swig)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
+const db = require("./main/models");
+const Role = db.Role;
+require('./main/routes/user.routes')(app);
+/*
+db.mongoose
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Successfully connect to MongoDB.");
+    initial();
+  })
+  .catch(err => {
+    console.error("Connection error", err);
+    process.exit();
+  });
 
+  function initial() {
+    Role.estimatedDocumentCount((err, count) => {
+      if (!err && count === 0) {
+        new Role({
+          name: "student"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'student' to roles collection");
+        });
+  
+        new Role({
+          name: "teacher"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'teacher' to roles collection");
+        });
+  
+        new Role({
+          name: "admin"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'admin' to roles collection");
+        });
+      }
+    });
+  }
+*/
 app.get('/', (req, res) => {
     //res.sendFile(__dirname + '/main/main.html');
     res.render(path.join(__dirname, '/main/main.html'), {name: ""});
