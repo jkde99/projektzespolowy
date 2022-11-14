@@ -1,5 +1,4 @@
 module.exports = {
-    HOST: "localhost",
-    PORT: 27017,
+    HOST: "jakub:123@cluster0.yd9mj.mongodb.net",
     DB: "ProjektZespolowy"
 };

@@ -1,22 +1,23 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const {MongoClient} = require('mongodb');
-const path = require('path');
-var cons = require('consolidate');
+//const bodyParser = require('body-parser');
+//const {MongoClient} = require('mongodb');
+//const path = require('path');
+//var cons = require('consolidate');
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const dbConfig = require("./main/config/db.config");
 
 var corsOptions = {
   origin: "http://localhost:3001"
 };
 
 const app = express();
-const uri = "mongodb+srv://jakub:123@cluster0.yd9mj.mongodb.net/?retryWrites=true&w=majority";
+//const uri = "mongodb+srv://jakub:123@cluster0.yd9mj.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.urlencoded({extended:true}));
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     name: "proj-session",
@@ -24,16 +25,17 @@ app.use(
     httpOnly: true
   })
 )
-app.use(express.static('main'));
-app.engine('html',cons.swig)
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
+//app.use(express.static('main'));
+//app.engine('html',cons.swig)
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'html');
 const db = require("./main/models");
-const Role = db.Role;
+const Role = db.role;
 require('./main/routes/user.routes')(app);
-/*
+require('./main/routes/auth.routes')(app);
+
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(`mongodb+srv://${dbConfig.HOST}/${dbConfig.DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -81,7 +83,12 @@ db.mongoose
       }
     });
   }
-*/
+
+app.get('/', (req, res) => {
+  res.render(path.join(__dirname, '/main/pages/glowna.html'))
+})
+
+/*
 app.get('/', (req, res) => {
     //res.sendFile(__dirname + '/main/main.html');
     res.render(path.join(__dirname, '/main/main.html'), {name: ""});
@@ -142,7 +149,7 @@ app.post('/register', (req,res)=>{
     });
     
   })
-})
+})*/
 
 const port = 3000;
 

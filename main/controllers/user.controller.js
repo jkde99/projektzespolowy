@@ -1,5 +1,7 @@
 exports.allAccess = (req, res) => {
-    res.status(200).send("Public Content.");
+    //res.status(200).send("Public Content.");
+    //res.render("../pages/glowna")
+    res.status(200).send("Public content.");
   };
   
   exports.studentBoard = (req, res) => {
