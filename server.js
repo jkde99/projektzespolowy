@@ -33,6 +33,7 @@ const db = require("./main/models");
 const Role = db.role;
 require('./main/routes/user.routes')(app);
 require('./main/routes/auth.routes')(app);
+require('./main/routes/quiz.routes')(app);
 
 db.mongoose
   .connect(`mongodb+srv://${dbConfig.HOST}/${dbConfig.DB}`, {
