@@ -7,7 +7,7 @@ exports.addQuestion = async (req, res) => {
         const { content } = req.body;
         const { answers } = req.body;
         const { correctAnswers } = req.body;
-        const { isFlagged } = false;
+        const isFlagged = false;
 
         const question = await Question.create({
             content,
@@ -34,7 +34,7 @@ exports.updateOne = async (req, res) => {
     try{
         const _id = req.params.id;
         const { content, answers, correctAnswers } = req.body;
-        const { isFlagged } = false;
+        const isFlagged = false;
         let question = await Question.findOne({_id});
         if(!question){
             question = await Question.create({
@@ -63,9 +63,38 @@ exports.deleteOne = async (req, res) => {
         if(question.deletedCount === 0){
             return res.status(404).json({"zwrotna":"bledne id"})
         } else {
-            return res.status(204).json({"zwrotna":"usunieto pomyslnie"})
+            return res.status(200).json({"zwrotna":"usunieto pomyslnie"})
         }
     } catch (error) {
         return res.status(500).json({"error":error})
     }
 }
+
+exports.flagAQuestion = async (req, res) => {
+    try {
+        const _id = req.params.id
+        
+        const question = await Question.findOne({_id});
+
+        if(!question){
+            return res.status(404).json({"zwrotna":"bledne id"});
+        } else {
+            question.isFlagged = true;
+            await question.save();
+            return res.status(200).json({"zwrotna":"pomyslnie oflagowane"})
+        }
+    } catch (error) {
+        return res.status(500).json({"error":error})
+    }
+}
+
+exports.addQuiz = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        return res.status(500).json({"error":error});
+    }
+}
+
+
+
