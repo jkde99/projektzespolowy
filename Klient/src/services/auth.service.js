@@ -40,20 +40,27 @@ class AuthService {
 
   async addSubject(name, sub) {
     try{
-      let result = await axios.patch(API_URL + "adds", {
+      let result = await axios.put(API_URL + "adds", {
         name,
         sub
       });
       console.log(result.response.data);
-    } catch(error){
-      console.log(error.response.data);
+    } catch (error){
+      const response = error.response;
+      console.log(response.data.errors);
     }
   }
 
-  removeSubject(name, sub){
-    axios.put(API_URL + "removes", {
-      name, sub
-    })
+  async removeSubject(name, sub){
+    try{
+      let result = await axios.put(API_URL + "removes", {
+        name, sub
+      })
+      console.log(result.response.data);
+    } catch (error){
+      const response = error.response;
+      console.log(response.data.errors);
+    }
   }
 }
 

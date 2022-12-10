@@ -2,6 +2,7 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
+const Subject = db.subject;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
@@ -97,6 +98,7 @@ exports.signin = (req, res) => {
       }
 
       req.session.token = token;
+      console.log(user.subjects);
 
       res.status(200).send({
         id: user._id,
@@ -117,26 +119,43 @@ exports.signout = async (req, res) => {
   }
 };
 
-exports.addSubjectToUser = (req, res) => {
+exports.addSubjectToUser = async (req, res) => {
   try {
-    console.log("test1");
-    var user = User.findOne({username: req.body.name});
-    var sub = req.body.sub;
-    user.subjects.push(sub);
-    user.save();
+    var user = await User.findOne({username: req.body.name});
+    console.log(user);
+    const sub = req.body.sub;
+    user = await User.updateOne(
+      {_id: user._id, 'subjects': {$ne: 'req.body.sub'}},
+      {$push: {subjects: sub}},
+      function (err, docs) {
+        if(err){
+          console.log(err);
+        } else {
+          console.log("Updated Docs: ", docs);
+        }
+      }
+    );
     res.status(200).json(sub);
   } catch (err) {
     return res.status(500).json({"error":err});
   }
 }
 
-exports.removeSubjectFromUser = (req, res) => {
+exports.removeSubjectFromUser = async (req, res) => {
   try {
-    console.log("test");
-    var user = User.findOne({username: req.body.name});
-    var sub = req.body.sub;
-    user.subjects.pull(sub);
-    user.save();
+    var user = await User.findOne({username: req.body.name});
+    const sub = req.body.sub;
+    user = await User.updateOne(
+      {_id: user._id},
+      {$pull: {subjects: sub}},
+      function (err, docs) {
+        if(err){
+          console.log(err);
+        } else {
+          console.log("Updated Docs: ", docs);
+        }
+      }
+    );
     res.status(200).json(sub);
   } catch (err) {
     return res.status(500).json({"error":err});
@@ -145,7 +164,7 @@ exports.removeSubjectFromUser = (req, res) => {
 
 exports.getSubjects = (req, res) => {
   try {
-    //console.log(db.SUBJECTS);
+    console.log(db.SUBJECTS);
     return res.status(200).json(db.SUBJECTS);
   } catch (err) {
     return res.status(500).json({"error":err});

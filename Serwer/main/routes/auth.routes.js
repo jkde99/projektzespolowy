@@ -24,6 +24,6 @@ module.exports = function(app) {
   app.post("/api/auth/signout", controller.signout);
 
   app.get("/api/auth/getsubjects", controller.getSubjects);
-  app.patch("/api/auth/adds", controller.addSubjectToUser);
-  app.patch("/api/auth/removes", controller.removeSubjectFromUser);
+  app.put("/api/auth/adds", controller.addSubjectToUser);
+  app.put("/api/auth/removes", controller.removeSubjectFromUser);
 };

@@ -20,6 +20,8 @@ export default class Profile extends Component {
     array.push(sub);
     const newObj = {...this.state.currentUser, subjects: array}
     this.setState({currentUser: newObj});
+    //console.log(JSON.stringify(newObj));
+    localStorage.setItem('user',JSON.stringify(newObj));
   }
 
   deleteSubject(name, sub){
@@ -28,10 +30,12 @@ export default class Profile extends Component {
     array = array.filter(e=>e !== sub);
     const newObj = {...this.state.currentUser, subjects: array}
     this.setState({currentUser: newObj});
+    localStorage.setItem('user',JSON.stringify(newObj));
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
+    console.log(currentUser);
     if (!currentUser) this.setState({ redirect: "/home" });
     AuthService.getSubjects()
       .then(result => this.setState({subjects: result.data}));
@@ -42,10 +46,9 @@ export default class Profile extends Component {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />
     }
-    
+
     const { currentUser } = this.state;
     const { subjects } = this.state;
-
 
     return (
       <div className="container">
@@ -74,7 +77,7 @@ export default class Profile extends Component {
         <ul>
           {subjects !== null && subjects.map((s) => 
             <>
-            <li key={s.name}>{s}</li> <button type="button" onClick={() => this.addSubject(currentUser.username, s)}>Dodaj</button>
+            <li key={s}>{s}</li> <button type="button" onClick={() => this.addSubject(currentUser.username, s)}>Dodaj</button>
             <button type="button" onClick={() => this.deleteSubject(currentUser.username, s)}>Usun</button>
             </>
           )
@@ -83,7 +86,7 @@ export default class Profile extends Component {
         <strong>User's subjects: </strong>
         <ul>
           {currentUser.subjects !== null &&
-          currentUser.subjects.map((sub) => <li key={sub.name}>{sub}</li>)}
+          currentUser.subjects.map((sub) => <li key={sub}>{sub}</li>)}
         </ul>
       </div>: null}
       </div>
