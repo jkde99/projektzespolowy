@@ -11,5 +11,6 @@ db.quiz = require("./quiz.model");
 db.question = require("./question.model")
 
 db.ROLES = ["student", "teacher", "admin"];
+db.SUBJECTS = ["j. polski","j. angielski","matematyka","informatyka","historia"];
 
 module.exports = db;

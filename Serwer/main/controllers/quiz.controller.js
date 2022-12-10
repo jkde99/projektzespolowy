@@ -1,6 +1,7 @@
 const { TopologyDescription } = require("mongodb");
 const db = require("../models");
 const Question = require("../models/question.model");
+const Quiz = require("../models/quiz.model");
 
 exports.addQuestion = async (req, res) => {
     try{
@@ -96,5 +97,13 @@ exports.addQuiz = async (req, res) => {
     }
 }
 
-
+exports.getQuizes = async (req, res) => {
+    try {
+        const sub = req.params.subject;
+        const quizes = await Quiz.find({subject: subject});
+        return res.status(200).json(quizes);
+    } catch (error) {
+        return res.status(500).json({"error":error});
+    }
+}
 

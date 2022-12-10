@@ -102,7 +102,8 @@ exports.signin = (req, res) => {
         id: user._id,
         username: user.username,
         roles: authorities,
-        accessToken: token
+        accessToken: token,
+        subjects: user.subjects
       });
     });
 };
@@ -115,3 +116,38 @@ exports.signout = async (req, res) => {
     this.next(err);
   }
 };
+
+exports.addSubjectToUser = (req, res) => {
+  try {
+    console.log("test1");
+    var user = User.findOne({username: req.body.name});
+    var sub = req.body.sub;
+    user.subjects.push(sub);
+    user.save();
+    res.status(200).json(sub);
+  } catch (err) {
+    return res.status(500).json({"error":err});
+  }
+}
+
+exports.removeSubjectFromUser = (req, res) => {
+  try {
+    console.log("test");
+    var user = User.findOne({username: req.body.name});
+    var sub = req.body.sub;
+    user.subjects.pull(sub);
+    user.save();
+    res.status(200).json(sub);
+  } catch (err) {
+    return res.status(500).json({"error":err});
+  }
+}
+
+exports.getSubjects = (req, res) => {
+  try {
+    //console.log(db.SUBJECTS);
+    return res.status(200).json(db.SUBJECTS);
+  } catch (err) {
+    return res.status(500).json({"error":err});
+  }
+}

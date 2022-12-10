@@ -9,16 +9,32 @@ export default class Profile extends Component {
     this.state = {
       redirect: null,
       userReady: false,
-      currentUser: { username: "" }
+      currentUser: { username: "" },
+      subjects: []
     };
+  }
+
+  addSubject(name, sub){
+    AuthService.addSubject(name, sub);
+    let array = this.state.currentUser.subjects.slice();
+    array.push(sub);
+    const newObj = {...this.state.currentUser, subjects: array}
+    this.setState({currentUser: newObj});
+  }
+
+  deleteSubject(name, sub){
+    AuthService.removeSubject(name, sub);
+    let array = this.state.currentUser.subjects.slice();
+    array = array.filter(e=>e !== sub);
+    const newObj = {...this.state.currentUser, subjects: array}
+    this.setState({currentUser: newObj});
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
-    console.log(currentUser);
-    console.log(localStorage);
-
     if (!currentUser) this.setState({ redirect: "/home" });
+    AuthService.getSubjects()
+      .then(result => this.setState({subjects: result.data}));
     this.setState({ currentUser: currentUser, userReady: true })
   }
 
@@ -26,8 +42,10 @@ export default class Profile extends Component {
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />
     }
-
+    
     const { currentUser } = this.state;
+    const { subjects } = this.state;
+
 
     return (
       <div className="container">
@@ -51,6 +69,21 @@ export default class Profile extends Component {
         <ul>
           {currentUser.roles &&
             currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+        </ul>
+        <strong>Subjects: </strong>
+        <ul>
+          {subjects !== null && subjects.map((s) => 
+            <>
+            <li key={s.name}>{s}</li> <button type="button" onClick={() => this.addSubject(currentUser.username, s)}>Dodaj</button>
+            <button type="button" onClick={() => this.deleteSubject(currentUser.username, s)}>Usun</button>
+            </>
+          )
+        }
+        </ul>
+        <strong>User's subjects: </strong>
+        <ul>
+          {currentUser.subjects !== null &&
+          currentUser.subjects.map((sub) => <li key={sub.name}>{sub}</li>)}
         </ul>
       </div>: null}
       </div>

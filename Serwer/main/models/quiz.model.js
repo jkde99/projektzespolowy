@@ -7,7 +7,11 @@ const Quiz = mongoose.model(
     questions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Question"
-    }]
+    }],
+    subject: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subject"
+    }
   })
 );
 

@@ -30,6 +30,7 @@ app.use(
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'html');
 const db = require("./main/models");
+const Subject = require('./main/models/subject.model');
 const Role = db.role;
 require('./main/routes/user.routes')(app);
 require('./main/routes/auth.routes')(app);
@@ -83,6 +84,59 @@ db.mongoose
         });
       }
     });
+    Subject.estimatedDocumentCount((err, count) => {
+      if(!err && count === 0){
+        new Subject({
+          name: "j. polski"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'j. polski' to subjects collection");
+        });
+
+        new Subject({
+          name: "j. angielski"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'j. angielski' to subjects collection");
+        });
+
+        new Subject({
+          name: "matematyka"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'matematyka' to subjects collection");
+        });
+
+        new Subject({
+          name: "informatyka"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'informatyka' to subjects collection");
+        });
+
+        new Subject({
+          name: "historia"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+  
+          console.log("added 'historia' to subjects collection");
+        });
+      }
+    })
   }
 
 app.get('/', (req, res) => {

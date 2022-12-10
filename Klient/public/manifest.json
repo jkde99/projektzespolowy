@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Aplikacja do testów",
+  "name": "Aplikacja do tworzenia i rozwiązywania testów",
   "icons": [
     {
       "src": "favicon.ico",
