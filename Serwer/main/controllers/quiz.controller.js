@@ -91,7 +91,13 @@ exports.flagAQuestion = async (req, res) => {
 
 exports.addQuiz = async (req, res) => {
     try {
-        
+        const array = req.params.questions;
+        const subject = req.params.subject;
+        const quiz = await Quiz.create({
+            array,
+            subject
+        })
+        return res.status(200).json(quiz);
     } catch (error) {
         return res.status(500).json({"error":error});
     }

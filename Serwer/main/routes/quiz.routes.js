@@ -9,9 +9,10 @@ module.exports = function(app){
         );
         next();
     });
-    app.post("/api/quiz/addq", [authJwt.verifyToken, authJwt.isTeacher], controller.addQuestion);
-    app.get("/api/quiz/get", [authJwt.verifyToken, authJwt.isTeacher], controller.getQuestions);
-    app.put("/api/quiz/update/:id", [authJwt.verifyToken, authJwt.isTeacher], controller.updateOne);
-    app.delete("/api/quiz/delete/:id", [authJwt.verifyToken, authJwt.isTeacher], controller.deleteOne);
-    app.put("/api/quiz/flag/:id", [authJwt.verifyToken], controller.flagAQuestion);
+    //app.post("/api/quiz/addq", [authJwt.verifyToken, authJwt.isTeacher], controller.addQuestion);
+    //app.get("/api/quiz/get", [authJwt.verifyToken, authJwt.isTeacher], controller.getQuestions);
+    //app.put("/api/quiz/update/:id", [authJwt.verifyToken, authJwt.isTeacher], controller.updateOne);
+    //app.delete("/api/quiz/delete/:id", [authJwt.verifyToken, authJwt.isTeacher], controller.deleteOne);
+    //app.put("/api/quiz/flag/:id", [authJwt.verifyToken], controller.flagAQuestion);
+    app.post("/api/quiz/addquiz",[authJwt.verifyToken, authJwt.isTeacher], controller.addQuiz);
 }

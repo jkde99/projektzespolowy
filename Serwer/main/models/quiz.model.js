@@ -8,10 +8,7 @@ const Quiz = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Question"
     }],
-    subject: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Subject"
-    }
+    subject: String
   })
 );
 
