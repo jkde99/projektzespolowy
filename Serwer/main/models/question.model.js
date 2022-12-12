@@ -4,8 +4,7 @@ const Question = mongoose.model(
     "Question",
     new mongoose.Schema({
         content: String,
-        answers: [String],
-        correctAnswers: [String],
+        answers: [{answer:String, isCorrect:Boolean}],
         isFlagged: Boolean
     })
 );
