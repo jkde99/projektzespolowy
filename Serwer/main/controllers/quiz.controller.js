@@ -91,12 +91,23 @@ exports.flagAQuestion = async (req, res) => {
 
 exports.addQuiz = async (req, res) => {
     try {
-        const array = req.params.questions;
-        const subject = req.params.subject;
-        const quiz = await Quiz.create({
-            array,
-            subject
+        const array = req.body.questions;
+        const sub = req.body.subject;
+        let newArray = [];
+        for(var i = 0; i < array.length; ++i){
+            let question = new Question({
+                content:array[i].content,
+                answers:array[i].answers,
+                isFlagged:array[i].isFlagged
+            })
+            newArray.push(question)
+        }
+        console.log(newArray)
+        const quiz = new Quiz({
+            questions:newArray,
+            subject:sub
         })
+        quiz.save();
         return res.status(200).json(quiz);
     } catch (error) {
         return res.status(500).json({"error":error});
@@ -105,8 +116,10 @@ exports.addQuiz = async (req, res) => {
 
 exports.getQuizes = async (req, res) => {
     try {
-        const sub = req.params.subject;
-        const quizes = await Quiz.find({subject: subject});
+        const sub = req.query.subject;
+        const quizes = await Quiz.find({subject: sub});
+        console.log(sub)
+        console.log("----", quizes)
         return res.status(200).json(quizes);
     } catch (error) {
         return res.status(500).json({"error":error});

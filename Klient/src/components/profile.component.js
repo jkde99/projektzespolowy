@@ -52,6 +52,8 @@ export default class Profile extends Component {
     const { currentUser } = this.state;
     const { subjects } = this.state;
 
+    AuthService.getQuizzes("matematyka");
+
     return (
       <div className="container">
         {(this.state.userReady) ?

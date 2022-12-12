@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:3000/api/auth/";
 
@@ -60,6 +61,20 @@ class AuthService {
     } catch (error){
       const response = error.response;
       console.log(response.data.errors);
+    }
+  }
+
+  async getQuizzes(sub){
+    try{
+      let result = await axios.get("http://localhost:3000/api/quiz/getquizzes", 
+      {
+        params: {subject: sub}, 
+        headers:authHeader()
+      }
+      )
+      console.log(result.data[0].questions[0])
+    } catch (error) {
+      console.log(error)
     }
   }
 }

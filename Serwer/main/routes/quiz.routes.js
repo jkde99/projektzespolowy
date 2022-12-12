@@ -15,4 +15,5 @@ module.exports = function(app){
     //app.delete("/api/quiz/delete/:id", [authJwt.verifyToken, authJwt.isTeacher], controller.deleteOne);
     //app.put("/api/quiz/flag/:id", [authJwt.verifyToken], controller.flagAQuestion);
     app.post("/api/quiz/addquiz",[authJwt.verifyToken, authJwt.isTeacher], controller.addQuiz);
+    app.get("/api/quiz/getquizzes",[authJwt.verifyToken],controller.getQuizes);
 }
