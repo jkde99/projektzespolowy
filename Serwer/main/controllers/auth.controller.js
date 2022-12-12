@@ -124,18 +124,22 @@ exports.addSubjectToUser = async (req, res) => {
     var user = await User.findOne({username: req.body.name});
     console.log(user);
     const sub = req.body.sub;
-    user = await User.updateOne(
-      {_id: user._id, 'subjects': {$ne: 'req.body.sub'}},
-      {$push: {subjects: sub}},
-      function (err, docs) {
-        if(err){
-          console.log(err);
-        } else {
-          console.log("Updated Docs: ", docs);
+    if(user.subjects.includes(sub)){
+      res.status(200).json({"message":"juz istnieje"});
+    } else {
+      user = await User.updateOne(
+        {_id: user._id},
+        {$push: {subjects: sub}},
+        function (err, docs) {
+          if(err){
+            console.log(err);
+          } else {
+            console.log("Updated Docs: ", docs);
+          }
         }
-      }
-    );
-    res.status(200).json(sub);
+      );
+      res.status(200).json(sub);
+    }
   } catch (err) {
     return res.status(500).json({"error":err});
   }

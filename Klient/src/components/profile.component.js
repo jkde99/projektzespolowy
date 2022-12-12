@@ -17,7 +17,9 @@ export default class Profile extends Component {
   addSubject(name, sub){
     AuthService.addSubject(name, sub);
     let array = this.state.currentUser.subjects.slice();
-    array.push(sub);
+    if(!array.includes(sub)){
+      array.push(sub);
+    }
     const newObj = {...this.state.currentUser, subjects: array}
     this.setState({currentUser: newObj});
     //console.log(JSON.stringify(newObj));
