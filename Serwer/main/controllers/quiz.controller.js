@@ -2,6 +2,7 @@ const { TopologyDescription } = require("mongodb");
 const db = require("../models");
 const Question = require("../models/question.model");
 const Quiz = require("../models/quiz.model");
+const User = require("../models/user.model");
 
 exports.addQuestion = async (req, res) => {
     try{
@@ -93,6 +94,7 @@ exports.addQuiz = async (req, res) => {
     try {
         const array = req.body.questions;
         const sub = req.body.subject;
+        const nam = req.body.name;
         let newArray = [];
         for(var i = 0; i < array.length; ++i){
             let question = new Question({
@@ -100,10 +102,12 @@ exports.addQuiz = async (req, res) => {
                 answers:array[i].answers,
                 isFlagged:array[i].isFlagged
             })
+            question.save();
             newArray.push(question)
         }
         console.log(newArray)
         const quiz = new Quiz({
+            name: nam,
             questions:newArray,
             subject:sub
         })
@@ -115,14 +119,57 @@ exports.addQuiz = async (req, res) => {
 }
 
 exports.getQuizes = async (req, res) => {
-    try {
-        const sub = req.query.subject;
-        const quizes = await Quiz.find({subject: sub});
-        console.log(sub)
-        console.log("----", quizes)
-        return res.status(200).json(quizes);
-    } catch (error) {
-        return res.status(500).json({"error":error});
-    }
+    Quiz.
+        find({subject:req.query.subject}).
+        populate('questions').
+        exec(function(err,quizzes){
+            if (err) {
+                res.status(500).send({ message: err });
+                return;
+            }
+            if (!quizzes) {
+                return res.status(404).send({ message: "Quizzes Not found." });
+            }
+            console.log(quizzes[0].questions[0])
+            return res.status(200).json(quizzes);
+        });
 }
 
+
+exports.finishQuiz = async (req,res) => {
+    try{
+        const qu = req.query.quiz;
+        var user = await User.findOne({username: req.query.name});
+        user = await User.updateOne(
+            {_id: user._id},
+            {$push: {finishedQuizes: qu}},
+            function (err, docs) {
+              if(err){
+                console.log(err);
+              } else {
+                console.log("Updated Docs: ", docs);
+              }
+            }
+          );
+        return res.status(200).json(qu);
+    } catch (err) {
+        return res.status(500).json({"error":err});
+    }
+    
+}
+
+exports.getFinishedQuizes = async (req, res) => {
+    User.
+        findOne({username: req.query.name}).
+        populate('finishedQuizes').
+        exec(function(err, user){
+            if (err) {
+                res.status(500).send({ message: err });
+                return;
+            }
+            if (!user) {
+                return res.status(404).send({ message: "User Not found." });
+            }
+            return res.status(200).json(user.finishedQuizes);
+        });
+}

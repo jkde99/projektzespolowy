@@ -16,4 +16,6 @@ module.exports = function(app){
     //app.put("/api/quiz/flag/:id", [authJwt.verifyToken], controller.flagAQuestion);
     app.post("/api/quiz/addquiz",[authJwt.verifyToken, authJwt.isTeacher], controller.addQuiz);
     app.get("/api/quiz/getquizzes",[authJwt.verifyToken],controller.getQuizes);
+    app.post("/api/quiz/finishq",[authJwt.verifyToken],controller.finishQuiz);
+    app.get("/api/quiz/getfinishedqzs",[authJwt.verifyToken],controller.getFinishedQuizes);
 }

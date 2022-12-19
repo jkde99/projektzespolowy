@@ -72,7 +72,7 @@ class AuthService {
         headers:authHeader()
       }
       )
-      console.log(result.data[0].questions[0])
+      console.log(result.data)
     } catch (error) {
       console.log(error)
     }

@@ -11,7 +11,13 @@ const User = mongoose.model(
         ref: "Role"
       }
     ],
-    subjects: [String]
+    subjects: [String],
+    finishedQuizes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Quiz"
+      }
+    ]
   })
 );
 

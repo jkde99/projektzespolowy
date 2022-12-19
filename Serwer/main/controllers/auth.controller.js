@@ -98,14 +98,15 @@ exports.signin = (req, res) => {
       }
 
       req.session.token = token;
-      console.log(user.subjects);
+      //console.log(user.subjects);
 
       res.status(200).send({
         id: user._id,
         username: user.username,
         roles: authorities,
         accessToken: token,
-        subjects: user.subjects
+        subjects: user.subjects,
+        finishedQuizes: user.finishedQuizes
       });
     });
 };
@@ -168,7 +169,7 @@ exports.removeSubjectFromUser = async (req, res) => {
 
 exports.getSubjects = (req, res) => {
   try {
-    console.log(db.SUBJECTS);
+    //console.log(db.SUBJECTS);
     return res.status(200).json(db.SUBJECTS);
   } catch (err) {
     return res.status(500).json({"error":err});
